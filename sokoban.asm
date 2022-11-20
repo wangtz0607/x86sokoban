@@ -3,8 +3,12 @@
 option casemap:none
 
 includelib \masm32\lib\msvcrt.lib
-_getch PROTO C :VARARG
-printf PROTO C :VARARG
+includelib \masm32\lib\kernel32.lib
+
+_getch PROTO C
+printf PROTO C :DWORD, :VARARG
+
+SetConsoleOutputCP PROTO :DWORD
 
 WALL    = 1
 BOX     = 2
@@ -24,11 +28,11 @@ newLine BYTE 0ah, 0
 clear   BYTE 1bh, "[1;1H", 1bh, "[2J", 0
 
 empty      BYTE "  ", 0
-player     BYTE 1bh, "[1;37;40m<>", 1bh, "[0;37;40m", 0
-wall       BYTE 1bh, "[0;34;40m██", 1bh, "[0;37;40m", 0
-box        BYTE 1bh, "[0;36;40m██", 1bh, "[0;37;40m", 0
+player     BYTE "<>", 0
+wall       BYTE 1bh, "[0;30;44m  ", 1bh, "[0;37;40m", 0
+box        BYTE 1bh, "[0;30;46m  ", 1bh, "[0;37;40m", 0
 storage    BYTE "()", 0
-boxStorage BYTE 1bh, "[0;32;40m██", 1bh, "[0;37;40m", 0
+boxStorage BYTE 1bh, "[0;30;42m  ", 1bh, "[0;37;40m", 0
 
 logo BYTE 1bh, "[0;36;40m"
      BYTE " ████    █████  ██   ██  █████  ██████    ███   ██   ██", 0ah
@@ -394,6 +398,7 @@ dmLoop2:
 drawMap endp
 
 start:
+    invoke SetConsoleOutputCP, 65001
 loop1:
     invoke drawWelcome
     invoke _getch

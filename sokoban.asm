@@ -2,8 +2,8 @@
 .model flat, stdcall
 option casemap:none
 
-includelib \masm32\lib\msvcrt.lib
-includelib \masm32\lib\kernel32.lib
+includelib C:\masm32\lib\msvcrt.lib
+includelib C:\masm32\lib\kernel32.lib
 
 _getch PROTO C
 printf PROTO C :DWORD, :VARARG
@@ -292,28 +292,28 @@ prDone3:
     ret
 pushRight endp
 
-isSolved proc
+completed proc
     mov eax, 1
     xor ebx, ebx
-isLoop1:
+cLoop1:
     xor ecx, ecx
-isLoop2:
+cLoop2:
     invoke getSquare, ebx, ecx
     test BYTE PTR [eax], STORAGE
-    jz isDone
+    jz cDone
     test BYTE PTR [eax], BOX
-    jnz isDone
+    jnz cDone
     xor eax, eax
     ret
-isDone:
+cDone:
     inc ecx
     cmp ecx, width_
-    jl isLoop2
+    jl cLoop2
     inc ebx
     cmp ebx, height
-    jl isLoop1
+    jl cLoop1
     ret
-isSolved endp
+completed endp
 
 drawWelcome proc
     invoke printf, OFFSET clear
@@ -444,7 +444,7 @@ end1:
 
 loop2:
     invoke drawMap
-    invoke isSolved
+    invoke completed
     test eax, eax
     jz done5
     invoke printf, OFFSET solved

@@ -14,9 +14,11 @@
 ml /coff sokoban.asm /link /subsystem:console
 ```
 
+**NOTE**: If you decide to install MASM32 SDK to a directory other than `C:\masm32`, change the `includelib` statements in `sokoban.asm` (lines 5-6) accordingly before compiling.
+
 ## Run
 
-Run `sokoban.exe` in an ANSI terminal such as [Windows Terminal](https://aka.ms/terminal), [Fluent Terminal](https://apps.microsoft.com/store/detail/fluent-terminal/9P2KRLMFXF9T) or [ConEmu](https://conemu.github.io/). The default Console Window Host (`conhost.exe`) is not supported due to lack of support for ANSI escape sequences.
+Run `sokoban.exe` in an ANSI terminal such as [Windows Terminal](https://aka.ms/terminal), [Fluent Terminal](https://apps.microsoft.com/store/detail/fluent-terminal/9P2KRLMFXF9T), [ConEmu](https://conemu.github.io/), or the built-in terminal of [Visual Studio Code](https://code.visualstudio.com/). The default Console Window Host (`conhost.exe`) is not supported due to lack of support for ANSI escape sequences.
 
 ## License
 

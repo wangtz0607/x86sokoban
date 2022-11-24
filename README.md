@@ -1,7 +1,7 @@
 <div align="center">
     <h1>SokobanMASM32</h1>
     <p><em>Sokoban written in x86 assembly</em></p>
-    <img src="screenshot.png">
+    <img src="screenshot.png" width="400px">
 </div>
 
 ## Compile

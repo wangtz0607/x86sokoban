@@ -21,7 +21,7 @@ RIGHT     = 77
 RETURN    = 13
 INTERRUPT = 3
 
-LEVELS = 6
+LEVELS = 7
 
 .data
 newLine BYTE 0ah, 0
@@ -121,12 +121,25 @@ map6 BYTE 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0
      BYTE 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0
      BYTE 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0
 
+map7 BYTE 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0
+     BYTE 1, 4, 4, 0, 0, 1, 0, 1, 1, 0, 1, 1
+     BYTE 1, 4, 4, 0, 0, 1, 1, 1, 0, 0, 0, 1
+     BYTE 1, 4, 4, 0, 0, 0, 0, 0, 2, 2, 0, 1
+     BYTE 1, 4, 4, 0, 0, 1, 0, 1, 0, 2, 0, 1
+     BYTE 1, 4, 4, 1, 1, 1, 0, 1, 0, 2, 0, 1
+     BYTE 1, 1, 1, 1, 0, 2, 0, 1, 2, 0, 0, 1
+     BYTE 0, 0, 0, 1, 0, 0, 2, 1, 0, 2, 0, 1
+     BYTE 0, 0, 0, 1, 0, 2, 0, 0, 2, 0, 0, 1
+     BYTE 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1
+     BYTE 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1
+
 levels DWORD OFFSET map1, 9, 8, 2, 2
        DWORD OFFSET map2, 11, 22, 8, 12
        DWORD OFFSET map3, 10, 14, 4, 7
        DWORD OFFSET map4, 10, 17, 1, 14
        DWORD OFFSET map5, 13, 22, 10, 8
        DWORD OFFSET map6, 13, 17, 7, 14
+       DWORD OFFSET map7, 11, 12, 1, 9
 
 level   DWORD 1
 map     DWORD ?

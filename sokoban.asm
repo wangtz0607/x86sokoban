@@ -21,7 +21,9 @@ RIGHT     = 77
 RETURN    = 13
 INTERRUPT = 3
 
-LEVELS = 8
+LEVELS = 60
+
+LEVELS_PER_ROW = 10
 
 .data
 newLine BYTE 0ah, 0
@@ -44,8 +46,8 @@ logo BYTE 1bh, "[0;36;40m"
      BYTE " █████   █████  ██  ███  █████  ██████  ██   ██ ██   ██", 0ah
      BYTE 1bh, "[0;37;40m", 0
 
-levelNotSelected BYTE 1bh, "[1;37;40mLEVEL %d", 1bh, "[0;37;40m", 0ah, 0
-levelSelected    BYTE 1bh, "[1;34;46mLEVEL %d", 1bh, "[0;37;40m", 0ah, 0
+levelNotSelected BYTE 1bh, "[1;37;40m  %2d", 1bh, "[0;37;40m  ", 0
+levelSelected    BYTE 1bh, "[1;34;46m  %2d", 1bh, "[0;37;40m  ", 0
 
 solved BYTE 1bh, "[1;32;40mSOLVED!", 1bh, "[0;37;40m", 0
 
@@ -352,11 +354,21 @@ dwLoop:
     cmp ecx, level
     jne dwElse
     invoke printf, OFFSET levelSelected
-    jmp dwDone
+    jmp dwDone1
 dwElse:
     invoke printf, OFFSET levelNotSelected
-dwDone:
+dwDone1:
     pop ecx
+    mov eax, ecx
+    cdq
+    mov ebx, LEVELS_PER_ROW
+    div ebx
+    test edx, edx
+    jnz dwDone2
+    push ecx
+    invoke printf, OFFSET newLine
+    pop ecx
+dwDone2:
     inc ecx
     cmp ecx, LEVELS
     jle dwLoop
@@ -426,6 +438,7 @@ drawMap endp
 
 start:
     invoke SetConsoleOutputCP, 65001
+
 loop1:
     invoke drawWelcome
     invoke _getch
@@ -435,22 +448,36 @@ loop1:
 done1:
     cmp eax, UP
     jne done2
-    cmp level, 1
-    je done2
-    dec level
+    cmp level, LEVELS_PER_ROW
+    jle done2
+    sub level, LEVELS_PER_ROW
     jmp loop1
 done2:
     cmp eax, DOWN
     jne done3
-    cmp level, LEVELS
-    je done3
-    inc level
+    cmp level, LEVELS-LEVELS_PER_ROW
+    jg done3
+    add level, LEVELS_PER_ROW
     jmp loop1
 done3:
-    cmp eax, RETURN
+    cmp eax, LEFT
     jne done4
-    jmp end1
+    cmp level, 1
+    je done4
+    dec level
+    jmp loop1
 done4:
+    cmp eax, RIGHT
+    jne done5
+    cmp level, LEVELS
+    je done5
+    inc level
+    jmp loop1
+done5:
+    cmp eax, RETURN
+    jne done6
+    jmp end1
+done6:
     jmp loop1
 end1:
 
@@ -473,35 +500,35 @@ loop2:
     invoke drawMap
     invoke completed
     test eax, eax
-    jz done5
+    jz done7
     invoke printf, OFFSET solved
     ret
-done5:
+done7:
     invoke _getch
     cmp eax, INTERRUPT
-    jne done6
+    jne done8
     ret
-done6:
+done8:
     cmp eax, UP
-    jne done7
+    jne done9
     invoke pushUp
     jmp loop2
-done7:
+done9:
     cmp eax, DOWN
-    jne done8
+    jne done10
     invoke pushDown
     jmp loop2
-done8:
+done10:
     cmp eax, LEFT
-    jne done9
+    jne done11
     invoke pushLeft
     jmp loop2
-done9:
+done11:
     cmp eax, RIGHT
-    jne done10
+    jne done12
     invoke pushRight
     jmp loop2
-done10:
+done12:
     jmp loop2
 end2:
 

@@ -20,7 +20,7 @@ ml /coff sokoban.asm /link /subsystem:console
 
 Run `sokoban.exe` in a terminal supporting ANSI escape sequences such as [Windows Terminal](https://aka.ms/terminal), [Fluent Terminal](https://apps.microsoft.com/store/detail/fluent-terminal/9P2KRLMFXF9T), [ConEmu](https://conemu.github.io/), or the built-in terminal of [Visual Studio Code](https://code.visualstudio.com/). **Do not double-click `sokoban.exe` directly**, or you will see a complete mess:
 
-<img src="mess.png" width="400px">
+<img src="mess.png" width="500px">
 
 ## License
 

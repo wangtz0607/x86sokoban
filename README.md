@@ -11,10 +11,9 @@
 3. Run
 
 ```sh
-ml /coff sokoban.asm /link /subsystem:console
+ml /c /coff sokoban.asm
+link /SUBSYSTEM:console /LIBPATH:"C:\masm32\lib" sokoban.obj
 ```
-
-**NOTE**: If you decide to install MASM32 SDK to a directory other than `C:\masm32`, change the `includelib` statements in `sokoban.asm` (lines 5-6) accordingly before compiling.
 
 ## Run
 

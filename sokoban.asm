@@ -2,8 +2,8 @@
 .model flat, stdcall
 option casemap:none
 
-includelib C:\masm32\lib\msvcrt.lib
-includelib C:\masm32\lib\kernel32.lib
+includelib msvcrt.lib
+includelib kernel32.lib
 
 _getch PROTO C
 printf PROTO C :DWORD, :VARARG

@@ -7,7 +7,7 @@
 ## Compile
 
 1. Install [MASM32 SDK](https://www.masm32.com/) to `C:\masm32`.
-2. Add `C:\masm32\bin` (the directory containing `ml.exe`) to `PATH`.
+2. Add `C:\masm32\bin` (the directory containing `ml.exe` and `link.exe`) to `PATH`.
 3. Run
 
 ```sh

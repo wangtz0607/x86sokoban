@@ -26,8 +26,9 @@ LEVELS = 60
 LEVELS_PER_ROW = 10
 
 .data
-newLine BYTE 0ah, 0
-clear   BYTE 1bh, "[1;1H", 1bh, "[2J", 0
+newLine     BYTE 0ah, 0
+moveToStart BYTE 1bh, "[1;1H", 0
+clear       BYTE 1bh, "[1;1H", 1bh, "[2J", 0
 
 empty      BYTE "  ", 0
 player     BYTE "<>", 0
@@ -1281,7 +1282,7 @@ cDone:
 completed endp
 
 drawWelcome proc
-    invoke printf, OFFSET clear
+    invoke printf, OFFSET moveToStart
     invoke printf, OFFSET logo
     invoke printf, OFFSET newLine
     mov ecx, 1
@@ -1350,7 +1351,7 @@ dsDone5:
 drawSquare endp
 
 drawMap proc
-    invoke printf, OFFSET clear
+    invoke printf, OFFSET moveToStart
     xor ebx, ebx
 dmLoop1:
     xor ecx, ecx
@@ -1374,6 +1375,7 @@ drawMap endp
 
 start:
     invoke SetConsoleOutputCP, 65001
+    invoke printf, OFFSET clear
 
 loop1:
     invoke drawWelcome
@@ -1431,6 +1433,7 @@ end1:
     mov playerX, edx
     mov edx, DWORD PTR [eax+16]
     mov playerY, edx
+    invoke printf, OFFSET clear
 
 loop2:
     invoke drawMap

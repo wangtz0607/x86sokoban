@@ -37,6 +37,10 @@ box        BYTE 1bh, "[0;30;46m  ", 1bh, "[0;37;40m", 0
 storage    BYTE "()", 0
 boxStorage BYTE 1bh, "[0;30;42m  ", 1bh, "[0;37;40m", 0
 
+warning BYTE "Seeing this message indicates that your terminal doesn't support "
+        BYTE "ANSI escape sequences, which is required in order for this program "
+        BYTE "to work correctly. See README.md for more information.", 0ah, 0ah, 0
+
 logo BYTE 1bh, "[0;36;40m"
      BYTE " ████    █████  ██   ██  █████  ██████    ███   ██   ██", 0ah
      BYTE "██  ██  ██   ██ ██  ██  ██   ██ ██   ██  ██ ██  ███  ██", 0ah
@@ -1375,6 +1379,7 @@ drawMap endp
 
 start:
     invoke SetConsoleOutputCP, 65001
+    invoke printf, OFFSET warning
     invoke printf, OFFSET clear
 
 loop1:

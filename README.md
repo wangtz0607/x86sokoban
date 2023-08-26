@@ -1,5 +1,5 @@
 <div align="center">
-    <h1>SokobanASM</h1>
+    <h1>x86sokoban</h1>
     <p><em><a href="https://en.wikipedia.org/wiki/Sokoban">Sokoban</a> written in x86 assembly</em></p>
     <img src="screenshot.png" width="400px">
 </div>

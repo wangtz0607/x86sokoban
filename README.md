@@ -27,4 +27,4 @@ Run `sokoban.exe` in a terminal supporting ANSI escape sequences (such as [Windo
 
 ## License
 
-SokobanMASM32 is licensed under the [MIT license](https://opensource.org/licenses/MIT).
+x86sokoban is licensed under the [MIT license](https://opensource.org/licenses/MIT).
